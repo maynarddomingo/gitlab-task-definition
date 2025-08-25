@@ -1,4 +1,6 @@
-#aws ecs create-service \
+#  aws ecs register-task-definition --cli-input-json file://gitlab-task-def.json
+
+# aws ecs create-service \
 #  --cluster YourClusterName \
 #  --service-name gitlab-ce \
 #  --task-definition gitlab-ce \
