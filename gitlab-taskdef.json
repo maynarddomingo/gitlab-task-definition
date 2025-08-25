@@ -1,3 +1,10 @@
+#aws ecs create-service \
+#  --cluster YourClusterName \
+#  --service-name gitlab-ce \
+#  --task-definition gitlab-ce \
+#  --desired-count 1 \
+#  --launch-type EC2
+
 {
   "family": "gitlab-ce",
   "networkMode": "bridge",
@@ -48,3 +55,5 @@
     }
   ]
 }
+
+
