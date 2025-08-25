@@ -1,0 +1,50 @@
+{
+  "family": "gitlab-ce",
+  "networkMode": "bridge",
+  "requiresCompatibilities": ["EC2"],
+  "cpu": "2048",
+  "memory": "8192",
+  "containerDefinitions": [
+    {
+      "name": "gitlab",
+      "image": "gitlab/gitlab-ce:latest",
+      "essential": true,
+      "portMappings": [
+        { "containerPort": 80, "hostPort": 80, "protocol": "tcp" },
+        { "containerPort": 443, "hostPort": 443, "protocol": "tcp" },
+        { "containerPort": 22, "hostPort": 22, "protocol": "tcp" }
+      ],
+      "mountPoints": [
+        { "sourceVolume": "gitlab-data", "containerPath": "/var/opt/gitlab" },
+        { "sourceVolume": "gitlab-config", "containerPath": "/etc/gitlab" },
+        { "sourceVolume": "gitlab-logs", "containerPath": "/var/log/gitlab" }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "name": "gitlab-data",
+      "efsVolumeConfiguration": {
+        "fileSystemId": "fs-09941ca46d90cde4e",
+        "rootDirectory": "/gitlab/data",
+        "transitEncryption": "ENABLED"
+      }
+    },
+    {
+      "name": "gitlab-config",
+      "efsVolumeConfiguration": {
+        "fileSystemId": "fs-XXXX",
+        "rootDirectory": "/gitlab/config",
+        "transitEncryption": "ENABLED"
+      }
+    },
+    {
+      "name": "gitlab-logs",
+      "efsVolumeConfiguration": {
+        "fileSystemId": "fs-XXXX",
+        "rootDirectory": "/gitlab/logs",
+        "transitEncryption": "ENABLED"
+      }
+    }
+  ]
+}
